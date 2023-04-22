@@ -4,7 +4,7 @@ import jakarta.persistence.Column;
 import lombok.Data;
 
 @Data
-public class NumberDto {
+public class NumberRequestDto {
 
     @Column(nullable = false)
     private int number;
