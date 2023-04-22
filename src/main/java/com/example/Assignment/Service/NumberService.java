@@ -45,9 +45,16 @@ public class NumberService {
              if(sum == 1)
              {
                  new_number = sum;
-
+                 break;
              }
          }
+         //numberRepository.updateNumber(num,new_number);
+
+         FetchResponseDto responseDto = new FetchResponseDto();
+         responseDto.setOldNum(old_value);
+         responseDto.setNewNum(new_number);
+
+         return responseDto;
 
     }
     public int findSum(int number)
