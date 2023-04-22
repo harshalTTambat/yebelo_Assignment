@@ -10,13 +10,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface NumberRepository extends JpaRepository<NumberEntity,Integer> {
-/*
+
     @Modifying
     @Transactional
-    @Query("update NumberEntity n set n.number =: newNum where n.id =:#{#xNumber.id}" )
+    @Query("update NumberEntity set number = :newNum where id =:#{#xNumber.id}" )
 
-    int updateNumber(NumberEntity xNumber,int newNum);
+    void updateNumber(NumberEntity xNumber,int newNum);
 
- */
+
 
 }

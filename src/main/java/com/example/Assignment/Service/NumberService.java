@@ -48,7 +48,7 @@ public class NumberService {
                  break;
              }
          }
-         //numberRepository.updateNumber(num,new_number);
+         numberRepository.updateNumber(num,new_number);
 
          FetchResponseDto responseDto = new FetchResponseDto();
          responseDto.setOldNum(old_value);
