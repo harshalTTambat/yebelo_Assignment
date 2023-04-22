@@ -20,5 +20,8 @@ public class NumberController {
     }
 
     @GetMapping("/FetchNextNumber/{id}")
-    public FetchResponseDto
+    public FetchResponseDto fetchNextNumber(@RequestParam("id") int id)
+    {
+        return numberService
+    }
 }
