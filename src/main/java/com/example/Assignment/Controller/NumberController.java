@@ -27,11 +27,11 @@ public class NumberController {
         String response = numberService.EnterNumber(numberDto);
         return new ResponseEntity<String>(response, HttpStatus.OK);
     }
-
     @GetMapping ("/FetchNextNumber/{id}")
-    public NumberEntity fetchNextNumber(@PathVariable("id") int id)
+    public ResponseEntity<NumberEntity> fetchNextNumber(@PathVariable("id") int id)
     {
-        return numberService.fetchNextNumber(id);
+        NumberEntity numberEntity = numberService.fetchNextNumber(id);
+        return new ResponseEntity<NumberEntity>(numberEntity,HttpStatus.OK);
     }
 
 }

@@ -18,7 +18,7 @@ public class NumberEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
+    // user need to enter the num first time
     private int numberChoice;
 
     private int newNumber;
