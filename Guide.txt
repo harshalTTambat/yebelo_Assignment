@@ -3,5 +3,8 @@
 Application for multiple users so there is unique id for respective user
 # new User need to enter a value for only first time to get its next number according to conditions
 # if user with id wants to fetch the next number again he just needs to enter id to endpoint of URL
-# In the database old number and new number are saved respective with user id
+# In the database old number and new number are saved respective with user id 
+
+
+
 
