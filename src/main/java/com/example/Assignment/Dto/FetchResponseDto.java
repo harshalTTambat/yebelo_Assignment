@@ -7,12 +7,18 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class FetchResponseDto {
 
-    private int oldNum;
+    private int old_number;
+    private int new_number;
 
-    private int newNum;
-
+    @Override
+    public String toString() {
+        return "FetchResponseDto{" +
+                "old_number=" + old_number +
+                ", new_number=" + new_number +
+                '}';
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.Assignment.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,7 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Number")
+@Table(name = "numbers")
 @Data
 @Builder
 @AllArgsConstructor
@@ -18,6 +19,9 @@ public class NumberEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false)
-    private int number;
+    private int numberChoice;
+
+    private int newNumber;
+
 }
+

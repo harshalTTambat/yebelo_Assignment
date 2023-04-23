@@ -7,8 +7,6 @@ import com.example.Assignment.Repository.NumberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class NumberService {
     @Autowired
@@ -16,9 +14,11 @@ public class NumberService {
 
     public String EnterNumber(NumberRequestDto numberDto)
     {
+        int num = numberDto.getNumberChoice();
+        int newNum = nextNumGenerator(num);
         NumberEntity xNumber = NumberEntity.builder().
-                number(numberDto.getNumber())
-                .build();
+                numberChoice(num).
+                newNumber(newNum).build();
 
         try {
             numberRepository.save(xNumber);
@@ -29,49 +29,55 @@ public class NumberService {
         return "number save successfully";
     }
 
-    public FetchResponseDto fetchNextNumber(int id)
+    public FetchResponseDto fetchNextNumber(int xNumber)
     {
-         NumberEntity num = numberRepository.findById(id).get();
-         int old_value = num.getNumber();
-
-         int new_number = 0;
-
-         boolean flag = false;
-         int tempNum = old_value;
-         while (!flag)
-         {
-             tempNum++;
-             int sum = findSum(tempNum);
-             if(sum == 1)
-             {
-                 new_number = sum;
-                 break;
-             }
-         }
-         numberRepository.updateNumber(num,new_number);
-
-         FetchResponseDto responseDto = new FetchResponseDto();
-         responseDto.setOldNum(old_value);
-         responseDto.setNewNum(new_number);
-
-         return responseDto;
-
+         NumberEntity num = numberRepository.findByNewNumber(xNumber);
+         FetchResponseDto fetchResponseDto = FetchResponseDto.builder().
+                 old_number(num.getNumberChoice()).
+                 new_number(num.getNewNumber()).
+                 build();
+         return fetchResponseDto;
     }
-    public int findSum(int number)
+    public int nextNumGenerator(int old_num)
     {
-        if (number < 9) return number;
+        int new_number = 0;
 
+        boolean flag = false;
+
+        int sum =0;
+        for(int i=old_num+1;i<old_num + 2000;i++)
+        {
+            if(flag)
+            {
+
+                new_number = i-1;
+                break;
+            }
+
+            sum = findSum(i);
+
+            if(sum == 1)
+            {
+                flag = true;
+            }
+
+        }
+        return new_number;
+    }
+
+    public int findSum(int n)
+    {
         int sum = 0;
 
-        while (number != 0)
+        while (n > 0 || sum > 9)
         {
-            sum = sum + number % 10;
-
-            number = number/10;
-
-            System.out.println(sum+" "+ number);
+            if (n == 0) {
+                n = sum;
+                sum = 0;
+            }
+            sum += n % 10;
+            n /= 10;
         }
-
-        return findSum(sum);
+        return sum;
     }
 }

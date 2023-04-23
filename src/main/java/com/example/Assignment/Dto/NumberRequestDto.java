@@ -7,5 +7,5 @@ import lombok.Data;
 public class NumberRequestDto {
 
     @Column(nullable = false)
-    private int number;
+    private int numberChoice;
 }
