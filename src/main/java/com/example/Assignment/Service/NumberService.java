@@ -1,6 +1,5 @@
 package com.example.Assignment.Service;
 
-import com.example.Assignment.Dto.FetchResponseDto;
 import com.example.Assignment.Dto.NumberRequestDto;
 import com.example.Assignment.Model.NumberEntity;
 import com.example.Assignment.Repository.NumberRepository;
@@ -29,14 +28,15 @@ public class NumberService {
         return "number save successfully";
     }
 
-    public FetchResponseDto fetchNextNumber(int xNumber)
+    public NumberEntity fetchNextNumber(int id)
     {
-         NumberEntity num = numberRepository.findByNewNumber(xNumber);
-         FetchResponseDto fetchResponseDto = FetchResponseDto.builder().
-                 old_number(num.getNumberChoice()).
-                 new_number(num.getNewNumber()).
-                 build();
-         return fetchResponseDto;
+         NumberEntity num = numberRepository.findById(id).get();
+
+         int newValue = nextNumGenerator(num.getNewNumber());
+         num.setNumberChoice(num.getNewNumber());
+         num.setNewNumber(newValue);
+         numberRepository.save(num);
+         return num;
     }
     public int nextNumGenerator(int old_num)
     {

@@ -28,10 +28,10 @@ public class NumberController {
         return new ResponseEntity<String>(response, HttpStatus.OK);
     }
 
-    @GetMapping ("/FetchNextNumber/{newNumber}")
-    public FetchResponseDto fetchNextNumber(@PathVariable("newNumber") int xNumber)
+    @GetMapping ("/FetchNextNumber/{id}")
+    public NumberEntity fetchNextNumber(@PathVariable("id") int id)
     {
-        return numberService.fetchNextNumber(xNumber);
+        return numberService.fetchNextNumber(id);
     }
 
 }

@@ -13,9 +13,8 @@ public interface NumberRepository extends JpaRepository<NumberEntity,Integer> {
 
     @Modifying
     @Transactional
-    @Query("update NumberEntity set numberChoice = :newNum where id =:tempId" )
-
-    NumberEntity updateNumber(Integer tempId,int newNum);
+    @Query(value = "update NumberEntity n set n.numberChoice = :oldNum"+" n.newNumber =:newNum"+" where n.id =:tempId",nativeQuery = true )
+    NumberEntity updateNumber(Integer tempId,int oldNum,int newNum);
 
 
 
